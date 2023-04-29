@@ -1,10 +1,8 @@
--- Imports
-local async = require("plenary.async")
-
--- Creates an object for the module.
+----------------------- MODULE DEFINITION
 local M = {}
 
--- Sets the path to the metal pipe sound
+------------------ PRIVATE IMPLEMENTATION
+-- Gets the absolute path to the metal pipe sound.
 local function get_metal_pipe_sound_path()
   local cwd_path = debug.getinfo(2, "S").source:sub(2)
 
@@ -13,23 +11,23 @@ local function get_metal_pipe_sound_path()
   return cwd_path:match("(.*/)") .. "assets" .. separator .. "metal-pipe-falling-sound.mp3"
 end
 
-local metal_pipe_sound_path = get_metal_pipe_sound_path()
-----------------------------------------
-
--- Functions to return the command for playing the metal pipe sound for different OSes
+-- Command-composing functions for sound
+-- playing. Each resulting command tries
+-- not to induce any additional dependencies.
 local function compose_mac_sound_playing_command(path)
-  return "!afplay " .. path
+  return "afplay " .. path
 end
 
 local function compose_linux_sound_playing_command(path)
-  return "!aplay " .. path
+  return "aplay " .. path
 end
 
 local function compose_windows_sound_playing_command(path)
-  return "!powershell -c (New-Object Media.SoundPlayer '" .. path .. "').PlaySync();"
+  return "powershell -c (New-Object Media.SoundPlayer '" .. path .. "').PlaySync();"
 end
-----------------------------------------
 
+-- Determines the correct command-composing
+-- function based on the current OS.
 local function get_os_specific_sound_playing_function()
   local operating_system = jit.os
 
@@ -42,12 +40,18 @@ local function get_os_specific_sound_playing_function()
   end
 end
 
+-- The command to play the metal pipe sound.
+-- Evaluated once at startup.
 local compiling_sound_playing_command =
-  get_os_specific_sound_playing_function()(metal_pipe_sound_path)
+  get_os_specific_sound_playing_function()(get_metal_pipe_sound_path())
+----------------------------------------
 
--- Plays the metal pipe sound
+----------------------- PUBLIC MODULE API
+-- Plays the metal pipe sound in a
+-- non-blocking way.
 function M.play_sound()
-  vim.cmd(compiling_sound_playing_command)
+  vim.fn.jobstart(compiling_sound_playing_command)
 end
 
+------------------------------ MODULE END
 return M
