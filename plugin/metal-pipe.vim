@@ -13,3 +13,6 @@ let g:loaded_metalpipeplugin = 1
 
 " Exposes the plugin's functions for use as commands in Neovim.
 command! -nargs=0 PlayMetalPipeSound lua require("metal-pipe").play_sound()
+command! -nargs=0 ToggleMetalPipeSoundOnWindowChange lua require("metal-pipe").toggle_metal_pipe_sound_on_window_change()
+command! -nargs=0 ToggleMetalPipeSoundOnBufferChange lua require("metal-pipe").toggle_metal_pipe_sound_on_buffer_write()
+command! -nargs=0 ToggleMetalPipeSoundOnKeyPress lua require("metal-pipe").toggle_metal_pipe_sound_on_keypress()
