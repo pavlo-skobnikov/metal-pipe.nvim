@@ -1,13 +1,14 @@
 --------------------------------- IMPORTS
-local global = vim.g
+local g = vim.g
+
 ----------------------- MODULE DEFINITION
 local M = {}
 
 ------------------ PRIVATE IMPLEMENTATION
 local defaults = {
-  metal_pipe_sound_on_window_change = true,
-  metal_pipe_sound_on_buffer_write = true,
-  metal_pipe_sound_on_keypress = false,
+  metal_pipe_on_buf_focus_change = true,
+  metal_pipe_on_buffer_write = true,
+  metal_pipe_on_cursor_movement = false,
 }
 
 local function filter_user_options_to_contain_only_valid_keys(user_options)
@@ -24,10 +25,9 @@ end
 
 local function set_global_variables(options)
   for key, value in pairs(options) do
-    global[key] = value
+    g[key] = value
   end
 end
-----------------------------------------
 
 ----------------------- PUBLIC MODULE API
 function M.setup(options)

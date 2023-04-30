@@ -8,10 +8,11 @@ local config = require 'metal-pipe.config'
 local M = {}
 
 ------------------- PLUGIN API DEFINITION
-M.play_sound = sound.play_sound
-M.toggle_metal_pipe_sound_on_window_change = triggers.toggle_metal_pipe_sound_on_window_change
+M.play_sound = sound.play_metal_pipe_sound
+M.toggle_metal_pipe_sound_on_buffer_focus_change =
+  triggers.toggle_metal_pipe_sound_on_buffer_focus_change
 M.toggle_metal_pipe_sound_on_buffer_write = triggers.toggle_metal_pipe_sound_on_buffer_write
-M.toggle_metal_pipe_sound_on_keypress = triggers.toggle_metal_pipe_sound_on_keypress
+M.toggle_metal_pipe_sound_on_cursor_movement = triggers.toggle_metal_pipe_sound_on_cursor_movement
 M.setup = config.setup
 
 ------------------------------ MODULE END

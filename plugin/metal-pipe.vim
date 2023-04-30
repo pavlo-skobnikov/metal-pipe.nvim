@@ -1,6 +1,6 @@
 " Title:        Metal Pipe Plugin
 " Description:  A meme plugin that plays the `metal pipe` sound effect on various editor actions.
-" Last Change:  28 April 2023
+" Last Change:  30 April 2023
 " Maintainer:   https://github.com/pavlo-skobnikov
 "
 " Prevents the plugin from being loaded multiple times. If the loaded
@@ -13,6 +13,6 @@ let g:loaded_metalpipeplugin = 1
 
 " Exposes the plugin's functions for use as commands in Neovim.
 command! -nargs=0 PlayMetalPipeSound lua require("metal-pipe").play_sound()
-command! -nargs=0 ToggleMetalPipeSoundOnWindowChange lua require("metal-pipe").toggle_metal_pipe_sound_on_window_change()
+command! -nargs=0 ToggleMetalPipeSoundOnWindowChange lua require("metal-pipe").toggle_metal_pipe_sound_on_buffer_focus_change()
 command! -nargs=0 ToggleMetalPipeSoundOnBufferChange lua require("metal-pipe").toggle_metal_pipe_sound_on_buffer_write()
-command! -nargs=0 ToggleMetalPipeSoundOnKeyPress lua require("metal-pipe").toggle_metal_pipe_sound_on_keypress()
+command! -nargs=0 ToggleMetalPipeSoundOnKeyPress lua require("metal-pipe").toggle_metal_pipe_sound_on_cursor_movement()
