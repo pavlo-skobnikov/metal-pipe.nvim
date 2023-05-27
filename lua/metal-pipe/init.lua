@@ -1,12 +1,19 @@
 --------------------------------- IMPORTS
-local sound = require("metal-pipe.sound")
+local sound = require 'metal-pipe.sound'
+local triggers = require 'metal-pipe.triggers'
+local config = require 'metal-pipe.config'
 
 ----------------------- MODULE DEFINITION
 -- Top-level plugin's module object.
 local M = {}
 
 ------------------- PLUGIN API DEFINITION
-M.play_sound = sound.play_sound
+M.play_sound = sound.play_metal_pipe_sound
+M.toggle_metal_pipe_sound_on_buffer_focus_change =
+  triggers.toggle_metal_pipe_sound_on_buffer_focus_change
+M.toggle_metal_pipe_sound_on_buffer_write = triggers.toggle_metal_pipe_sound_on_buffer_write
+M.toggle_metal_pipe_sound_on_cursor_movement = triggers.toggle_metal_pipe_sound_on_cursor_movement
+M.setup = config.setup
 
 ------------------------------ MODULE END
 return M
